@@ -114,18 +114,17 @@ export default function ProductList() {
 @media (max-width: 480px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 8px !important;
-    padding: 6px !important;
+    gap: 6px !important;           
+    padding: 6px !important;      
   }
   .product-grid > div {
-    width: 120px !important;     /* card lebih besar supaya muat gambar */
-    height: 220px !important;    /* sesuaikan tinggi */
-    padding: 4px !important;
+    width: 120px !important;     /* ukuran card sesuai layar HP */
+    height: 220px !important;
+    padding: 6px !important;       
   }
   .product-grid > div img {
     width: 70px !important;
     height: 70px !important;
-    object-fit: contain !important;
   }
   .product-grid > div h3 {
     font-size: 11px !important;
@@ -134,14 +133,14 @@ export default function ProductList() {
   }
   .product-grid > div p {
     font-size: 11px !important;
-    height: 40px !important;
-    overflow: hidden;
+    margin: 4px 0;
   }
   .product-grid > div button {
     padding: 4px 8px !important;
     font-size: 11px !important;
   }
 }
+
 
 
       `}</style>
