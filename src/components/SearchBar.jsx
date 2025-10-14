@@ -8,7 +8,7 @@ export default function SearchBar({ searchTerm, onSearchChange }) {
     display: "flex",
     justifyContent: "center",
     padding: "20px",
-    backgroundColor: theme === "dark" ? "#141414" : "#fafafa",
+    backgroundColor: theme === "dark" ? "#141414" : "#f5f5f5",
     transition: "all 0.3s ease",
   };
 

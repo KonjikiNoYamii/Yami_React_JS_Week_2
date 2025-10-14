@@ -15,20 +15,6 @@ export default function Home() {
     fontFamily: "'Poppins', sans-serif",
   };
 
-  const buttonStyle = {
-    backgroundColor: theme === "dark" ? "#b30000" : "#ff4d4d",
-    color: "#fff",
-    border: "none",
-    padding: "10px 20px",
-    borderRadius: "8px",
-    cursor: "pointer",
-    fontWeight: "600",
-    boxShadow: theme === "dark" 
-      ? "0 0 10px rgba(255,0,0,0.3)" 
-      : "0 0 6px rgba(255,0,0,0.2)",
-    transition: "all 0.2s ease-in-out",
-  };
-
   return (
     <div style={style}>
       

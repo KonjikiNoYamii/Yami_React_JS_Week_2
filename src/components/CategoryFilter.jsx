@@ -3,17 +3,18 @@ import { ThemeContext } from "../context/ThemeContext";
 
 export default function CategoryFilter({ selectCategory, onCategoryChange }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const [activeOutline, setActiveOutline] = useState(false); // untuk tombol tema
+  const [activeOutline, setActiveOutline] = useState(false);
 
   const navbarStyle = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "15px 30px",
-    backgroundColor: theme === "dark" ? "#1a1a1a" : "#f0f0f0",
-    borderBottom: theme === "dark" ? "2px solid #b30000" : "2px solid #ff4d4d",
+    backgroundColor: theme === "dark" ? "#1a1a1a" : "#f5f5f5", // pakai putih tetap
+    borderBottom: "2px solid", 
     color: theme === "dark" ? "#f5f5f5" : "#111111",
     transition: "background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease",
+    boxSizing: "border-box",
   };
 
   const categoryListStyle = {
@@ -26,27 +27,33 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
 
   const buttonStyle = {
     position: "relative",
-    backgroundColor: theme === "dark" ? "#1a1a1a" : "",
-    color: theme ===  "dark" ? "white": "black",
+    width: "50px",  // ukuran tetap
+    height: "50px", // ukuran tetap
+    backgroundColor: theme === "dark" ? "#1a1a1a" : "#f5f5f5", // warna light fix
+    color: theme === "dark" ? "white" : "black",
     border: "none",
     borderRadius: "8px",
-    padding: "10px 16px",
+    padding: "0", // padding dihapus karena width/height sudah fix
     cursor: "pointer",
     fontWeight: "700",
     fontSize: "25px",
-    transition: "transform 0.3s ease, background-color 0.3s ease",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
     overflow: "hidden",
+    transition: "transform 0.3s ease, background-color 0.3s ease",
   };
 
   const outlineStyle = {
     position: "absolute",
     bottom: "0px",
     left: "0",
-    width: activeOutline ? "100%" : "0%",
+    width: "100%", // lebar tetap
     height: "3px",
     backgroundColor: "#fff",
     borderRadius: "2px",
-    transition: "width 0.35s ease",
+    transition: "opacity 0.35s ease",
+    opacity: activeOutline ? 1 : 0, // pakai opacity untuk animasi
   };
 
   const categories = [
@@ -108,7 +115,6 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
         style={buttonStyle}
         onClick={() => {
           setActiveOutline(true);
-          requestAnimationFrame(() => setActiveOutline("expand"));
           toggleTheme();
           setTimeout(() => setActiveOutline(false), 400); 
         }}
