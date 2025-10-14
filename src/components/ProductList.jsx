@@ -133,30 +133,31 @@ export default function ProductList() {
 @media (max-width: 480px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr) !important; /* 2 kolom */
-    gap: 10px !important;
-    padding: 10px !important;
+    gap: 6px !important;
+    padding: 6px !important;
   }
   .product-grid > div {
-    width: 140px !important;   /* card proporsional */
-    height: 250px !important;
-    padding: 10px !important;
+    width: 120px !important;   /* lebih kecil */
+    height: 220px !important;
+    padding: 8px !important;
   }
   .product-grid > div img {
-    width: 90px !important;
-    height: 90px !important;
+    width: 70px !important;
+    height: 70px !important;
   }
   .product-grid > div h3 {
-    font-size: 13px !important;
-    height: 50px !important;
+    font-size: 11px !important;
+    height: 40px !important;
   }
   .product-grid > div p {
-    font-size: 13px !important;
+    font-size: 11px !important;
   }
   .product-grid > div button {
-    padding: 6px 10px !important;
-    font-size: 13px !important;
+    padding: 4px 8px !important;
+    font-size: 11px !important;
   }
 }
+
 
       `}</style>
     </div>
