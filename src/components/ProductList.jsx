@@ -132,14 +132,17 @@ export default function ProductList() {
         }
 @media (max-width: 480px) {
   .product-grid {
-    grid-template-columns: repeat(2, 1fr) !important; /* 2 kolom */
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 6px !important;
-    padding: 6px !important;
+    padding-left: 4px !important;   /* kurangi padding kiri */
+    padding-right: 4px !important;  /* kurangi padding kanan */
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
   }
   .product-grid > div {
-    width: 120px !important;   /* lebih kecil */
+    width: 120px !important;
     height: 220px !important;
-    padding: 8px !important;
+    padding: 6px !important;
   }
   .product-grid > div img {
     width: 70px !important;
@@ -157,6 +160,7 @@ export default function ProductList() {
     font-size: 11px !important;
   }
 }
+
 
 
       `}</style>
