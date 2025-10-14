@@ -67,13 +67,13 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
   ];
 
   return (
-    <>
+  <>
   <nav style={navbarStyle}>
     <h3
       style={{
         fontWeight: "800",
-        letterSpacing: "1.2px",
-        fontSize: "1.3rem",
+        letterSpacing: "1px",
+        fontSize: "1.1rem",
         color: "red",
         transition: "color 0.6s ease",
       }}
@@ -92,11 +92,11 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
             onClick={() => onCategoryChange(c.value)}
             style={{
               cursor: "pointer",
-              borderBottom: `3px solid ${isActive ? activeColor : "transparent"}`,
+              borderBottom: `2px solid ${isActive ? activeColor : "transparent"}`,
               color: isActive ? activeColor : theme === "dark" ? "#f5f5f5" : "#111111",
-              fontWeight: isActive ? "700" : "600",
-              paddingBottom: "4px",
-              fontSize: "1rem",
+              fontWeight: isActive ? "700" : "500",
+              paddingBottom: "2px",
+              fontSize: "0.7rem",
               transition:
                 "color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease",
             }}
@@ -123,28 +123,29 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
   <style>{`
     @media (max-width: 480px) {
       nav {
-        padding: 6px 8px !important;       /* lebih ramping */
-        font-size: 0.85rem !important;
+        padding: 4px 6px !important;
+        font-size: 0.75rem !important;
       }
       nav h3 {
-        font-size: 0.9rem !important;
+        font-size: 0.85rem !important;
       }
       nav ul li {
-        font-size: 0.75rem !important;
-        padding-bottom: 2px !important;
+        font-size: 0.65rem !important;
+        padding-bottom: 1px !important;
       }
       nav button {
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 18px !important;
+        width: 30px !important;
+        height: 30px !important;
+        font-size: 16px !important;
       }
       nav ul {
-        gap: 6px !important;
+        gap: 4px !important;
         justify-content: center;
       }
     }
   `}</style>
 </>
+
 
   );
 }
