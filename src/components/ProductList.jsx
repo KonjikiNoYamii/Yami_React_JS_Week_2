@@ -118,8 +118,8 @@ export default function ProductList() {
     padding: 6px !important;      
   }
   .product-grid > div {
-    width: 120px !important;
-    height: 220px !important;
+    width: 90px !important;
+    height: 150px !important;
     padding: 4px !important;       
   }
   .product-grid > div img {
