@@ -130,32 +130,34 @@ export default function ProductList() {
             height: 200px !important;
           }
         }
-        @media (max-width: 480px) {
-          .product-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 8px !important;
-            padding: 6px !important;
-          }
-          .product-grid > div {
-            width: 100px !important;
-            height: 180px !important;
-          }
-          .product-grid > div img {
-            width: 70px !important;
-            height: 70px !important;
-          }
-          .product-grid > div h3 {
-            font-size: 12px !important;
-            height: 45px !important;
-          }
-          .product-grid > div p {
-            font-size: 12px !important;
-          }
-          .product-grid > div button {
-            padding: 6px 10px !important;
-            font-size: 12px !important;
-          }
-        }
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important; /* 2 kolom */
+    gap: 10px !important;
+    padding: 10px !important;
+  }
+  .product-grid > div {
+    width: 140px !important;   /* card proporsional */
+    height: 250px !important;
+    padding: 10px !important;
+  }
+  .product-grid > div img {
+    width: 90px !important;
+    height: 90px !important;
+  }
+  .product-grid > div h3 {
+    font-size: 13px !important;
+    height: 50px !important;
+  }
+  .product-grid > div p {
+    font-size: 13px !important;
+  }
+  .product-grid > div button {
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+  }
+}
+
       `}</style>
     </div>
   );
