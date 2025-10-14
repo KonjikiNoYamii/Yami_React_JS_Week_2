@@ -138,11 +138,11 @@ export default function ProductList() {
           }
           .product-grid > div {
             width: 100px !important;
-            height: 200px !important;
+            height: 180px !important;
           }
           .product-grid > div img {
-            width: 100px !important;
-            height: 100px !important;
+            width: 70px !important;
+            height: 70px !important;
           }
           .product-grid > div h3 {
             font-size: 12px !important;
@@ -152,7 +152,7 @@ export default function ProductList() {
             font-size: 12px !important;
           }
           .product-grid > div button {
-            padding: 3px 6px !important;
+            padding: 6px 10px !important;
             font-size: 12px !important;
           }
         }
