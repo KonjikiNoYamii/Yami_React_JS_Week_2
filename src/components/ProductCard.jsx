@@ -55,6 +55,43 @@ export default function ProductCard({ product }) {
       <button style={buttonStyle} onClick={() => addCart(product)}>
         Add to Cart
       </button>
+
+      <style>{`
+      @media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;
+    padding: 6px !important;
+  }
+
+  .product-grid > div {
+    width: 100% !important;       /* penuh sesuai kolom */
+    height: 200px !important;      /* lebih kecil */
+    padding: 4px !important;
+  }
+
+  .product-grid > div img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .product-grid > div h3 {
+    font-size: 10px !important;
+    height: 36px !important;
+    overflow: hidden;
+  }
+
+  .product-grid > div p {
+    font-size: 10px !important;
+    margin: 2px 0;
+  }
+
+  .product-grid > div button {
+    padding: 2px 6px !important;
+    font-size: 10px !important;
+  }
+}
+`}</style>
     </div>
   );
 }
