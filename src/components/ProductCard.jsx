@@ -11,44 +11,52 @@ export default function ProductCard({ product }) {
     color: theme === "dark" ? "#f5f5f5" : "#111",
     border: `1px solid ${theme === "dark" ? "#b30000" : "#ff4d4d"}`,
     borderRadius: "12px",
-    padding: "20px",
+    padding: "25px",
     margin: "15px",
-    width: "200px",
+    width: "250px",
+    height: "400px",
     textAlign: "center",
-    boxShadow:
-      theme === "dark"
-        ? "0 4px 10px rgba(255,0,0,0.2)"
-        : "0 4px 10px rgba(255,0,0,0.1)",
-    transition: "all 0.3s",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center", 
+    transition: "transform 0.2s, background-color 0.3s",
+  };
+
+  const imgStyle = {
+    width: "150px",
+    height: "150px",
+    objectFit: "contain",
+    marginBottom: "10px",
+    display: "block",
+    marginLeft: "auto",
+    marginRight: "auto", 
   };
 
   const buttonStyle = {
     backgroundColor: theme === "dark" ? "#b30000" : "#ff4d4d",
     color: "#fff",
     border: "none",
-    padding: "8px 12px",
+    padding: "10px 16px",
     borderRadius: "8px",
     cursor: "pointer",
     fontWeight: "600",
-    transition: "0.2s",
+    transition: "background-color 0.3s, transform 0.2s",
   };
 
   return (
-    <div style={cardStyle}>
-      <img
-        src={product.image}
-        alt={product.title}
-        style={{
-          width: "100px",
-          height: "100px",
-          objectFit: "contain",
-          marginBottom: "10px",
-        }}
-      />
-      <h3 style={{ fontSize: "14px", height: "40px" }}>{product.title}</h3>
-      <p style={{ fontWeight: "700", margin: "8px 0" }}>${product.price}</p>
+    <div
+      style={cardStyle}
+      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+    >
+      <img src={product.image} alt={product.title} style={imgStyle} />
+      <h3 style={{ fontSize: "16px", height: "60px" }}>{product.title}</h3>
+      <p style={{ fontWeight: "700", margin: "10px 0", fontSize: "16px" }}>
+        ${product.price}
+      </p>
       <button style={buttonStyle} onClick={() => addCart(product)}>
-        Add to Cart 🛒
+        Add to Cart 
       </button>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { ThemeContext } from "../context/ThemeContext";
 
@@ -6,10 +6,20 @@ export default function CartBadge() {
   const { item } = useContext(CartContext);
   const { theme } = useContext(ThemeContext);
 
+  const [animate, setAnimate] = useState(false);
+
+  // Trigger animasi saat jumlah item berubah
+  useEffect(() => {
+    if (item.length === 0) return;
+    setAnimate(true);
+    const timer = setTimeout(() => setAnimate(false), 300); // durasi animasi
+    return () => clearTimeout(timer);
+  }, [item.length]);
+
   const badgeStyle = {
     position: "fixed",
-    bottom: "25px", // 👈 Sekarang di bawah
-    right: "25px", // tetap kanan
+    bottom: "25px",
+    right: "25px",
     backgroundColor: theme === "dark" ? "#b30000" : "#ff4d4d",
     color: "#fff",
     borderRadius: "50%",
@@ -20,13 +30,10 @@ export default function CartBadge() {
     alignItems: "center",
     fontWeight: "700",
     fontSize: "18px",
-    boxShadow:
-      theme === "dark"
-        ? "0 0 15px rgba(255, 0, 0, 0.5)"
-        : "0 0 10px rgba(255, 0, 0, 0.3)",
     zIndex: 100,
     cursor: "pointer",
-    transition: "all 0.3s ease",
+    transition: "transform 0.3s ease",
+    transform: animate ? "scale(1.3)" : "scale(1)", // ✨ efek pop
   };
 
   const textStyle = {

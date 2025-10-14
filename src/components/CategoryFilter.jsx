@@ -1,37 +1,52 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 
 export default function CategoryFilter({ selectCategory, onCategoryChange }) {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const [activeOutline, setActiveOutline] = useState(false); // untuk tombol tema
 
   const navbarStyle = {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "10px 20px",
+    padding: "15px 30px",
     backgroundColor: theme === "dark" ? "#1a1a1a" : "#f0f0f0",
-    borderBottom: theme === "dark" ? "1px solid #b30000" : "1px solid #ff4d4d",
+    borderBottom: theme === "dark" ? "2px solid #b30000" : "2px solid #ff4d4d",
     color: theme === "dark" ? "#f5f5f5" : "#111111",
     transition: "background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease",
   };
 
   const categoryListStyle = {
     display: "flex",
-    gap: "20px",
+    gap: "25px",
     listStyle: "none",
     margin: 0,
     padding: 0,
   };
 
   const buttonStyle = {
+    position: "relative",
     backgroundColor: theme === "dark" ? "#b30000" : "#ff4d4d",
     color: "#fff",
     border: "none",
-    borderRadius: "6px",
-    padding: "8px 12px",
+    borderRadius: "8px",
+    padding: "10px 16px",
     cursor: "pointer",
-    fontWeight: "600",
-    transition: "background-color 0.4s ease, transform 0.3s ease",
+    fontWeight: "700",
+    fontSize: "1rem",
+    transition: "transform 0.3s ease, background-color 0.3s ease",
+    overflow: "hidden",
+  };
+
+  const outlineStyle = {
+    position: "absolute",
+    bottom: "0px",
+    left: "0",
+    width: activeOutline ? "100%" : "0%",
+    height: "3px",
+    backgroundColor: "#fff",
+    borderRadius: "2px",
+    transition: "width 0.35s ease",
   };
 
   const categories = [
@@ -46,8 +61,10 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
     <nav style={navbarStyle}>
       <h3
         style={{
-          fontWeight: "700",
-          letterSpacing: "1px",
+          fontWeight: "800",
+          letterSpacing: "1.2px",
+          fontSize: "1.3rem",
+          color: "red",
           transition: "color 0.6s ease",
         }}
       >
@@ -57,39 +74,28 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
       <ul style={categoryListStyle}>
         {categories.map((c) => {
           const isActive = selectCategory === c.value;
+          const activeColor = theme === "dark" ? "#b30000" : "#ff4d4d";
+
           return (
             <li
               key={c.value}
               onClick={() => onCategoryChange(c.value)}
               style={{
                 cursor: "pointer",
-                borderBottom: `2px solid ${
-                  isActive
-                    ? theme === "dark"
-                      ? "#b30000"
-                      : "#ff4d4d"
-                    : "transparent"
-                }`,
-                color: isActive
-                  ? theme === "dark"
-                    ? "#b30000"
-                    : "#ff4d4d"
-                  : theme === "dark"
-                  ? "#f5f5f5"
-                  : "#111111",
-                fontWeight: isActive ? "700" : "500",
-                paddingBottom: "4px",
-                transition:
-                  "color 0.5s ease, border-bottom-color 0.5s ease, transform 0.3s ease, text-shadow 0.4s ease",
+                borderBottom: `3px solid ${isActive ? activeColor : "transparent"}`,
+                color: isActive ? activeColor : theme === "dark" ? "#f5f5f5" : "#111111",
+                fontWeight: isActive ? "700" : "600",
+                paddingBottom: "6px",
+                fontSize: "1.05rem",
+                transition: "color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease",
               }}
               onMouseEnter={(e) => {
-                e.target.style.transform = "scale(1.1)";
-                e.target.style.textShadow =
-                  "0 0 8px rgba(255, 77, 77, 0.5)";
+                e.target.style.transform = "scale(1.08)";
+                if (!isActive) e.target.style.color = activeColor; 
               }}
               onMouseLeave={(e) => {
-                e.target.style.transform = "scale(1.0)";
-                e.target.style.textShadow = "none";
+                e.target.style.transform = "scale(1)";
+                if (!isActive) e.target.style.color = theme === "dark" ? "#f5f5f5" : "#111111";
               }}
             >
               {c.label}
@@ -100,11 +106,17 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
 
       <button
         style={buttonStyle}
-        onClick={toggleTheme}
-        onMouseEnter={(e) => (e.target.style.transform = "scale(1.05)")}
-        onMouseLeave={(e) => (e.target.style.transform = "scale(1.0)")}
+        onClick={() => {
+          setActiveOutline(true);
+          requestAnimationFrame(() => setActiveOutline("expand"));
+          toggleTheme();
+          setTimeout(() => setActiveOutline(false), 400); 
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
       >
-        {theme === "dark" ? "🌞 Terang" : "🌙 Gelap"}
+        {theme === "dark" ? "🌞" : "🌙"}
+        <span style={outlineStyle}></span>
       </button>
     </nav>
   );
