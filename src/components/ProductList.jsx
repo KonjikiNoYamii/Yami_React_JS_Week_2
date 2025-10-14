@@ -134,7 +134,7 @@ export default function ProductList() {
           .product-grid {
             grid-template-columns: repeat(2, 1fr) !important;
             gap: 8px !important;
-            padding: 10px !important;
+            padding: 6px !important;
           }
           .product-grid > div {
             width: 100px !important;
