@@ -79,25 +79,67 @@ export default function ProductList() {
       <SearchBar searchTerm={search} onSearchChange={setSearch} />
 
       {displayProducts.length === 0 ? (
-        <p>Produk tidak ditemukan...</p>
-      ) : (
-        <div style={gridStyle} className="product-grid">
-          {displayProducts.map((product, idx) => (
-            <div
-              key={product.id}
-              style={{
-                opacity: fadeOut ? 0 : 1,
-                transform: fadeOut ? "translateY(20px)" : "translateY(0)",
-                transition: `opacity 0.4s ease ${
-                  idx * 50
-                }ms, transform 0.4s ease ${idx * 50}ms`,
-              }}
-            >
-              <ProductCard product={product} />
-            </div>
-          ))}
-        </div>
-      )}
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: "300px",
+      textAlign: "center",
+      color: theme === "dark" ? "#f5f5f5" : "#111111",
+      transition: "color 0.5s ease",
+      gap: "15px",
+      padding: "20px",
+    }}
+  >
+    <img
+      src="/empty.gif"
+      alt="Tidak ditemukan"
+      style={{
+        width: "200px",
+        maxWidth: "80%",
+        height: "200px",
+        objectFit: "contain",
+        opacity: 0.7,
+        transition: "opacity 0.5s ease, transform 0.5s ease",
+      }}
+    />
+    <p
+      style={{
+        fontSize: "1.2rem",
+        fontWeight: "600",
+        margin: 0,
+      }}
+    >
+      Produk tidak ditemukan...
+    </p>
+    <p
+      style={{
+        fontSize: "0.9rem",
+        color: theme === "dark" ? "#ccc" : "#555",
+        margin: 0,
+      }}
+    >
+      Coba ubah kata kunci atau pilih kategori lain.
+    </p>
+  </div>
+) : (
+  <div style={gridStyle} className="product-grid">
+    {displayProducts.map((product, idx) => (
+      <div
+        key={product.id}
+        style={{
+          opacity: fadeOut ? 0 : 1,
+          transform: fadeOut ? "translateY(20px)" : "translateY(0)",
+          transition: `opacity 0.4s ease ${idx * 50}ms, transform 0.4s ease ${idx * 50}ms`,
+        }}
+      >
+        <ProductCard product={product} />
+      </div>
+    ))}
+  </div>
+)}
 
       {/* Media Query responsive */}
       <style>{`
