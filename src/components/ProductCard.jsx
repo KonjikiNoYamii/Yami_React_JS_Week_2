@@ -65,8 +65,8 @@ export default function ProductCard({ product }) {
   }
 
   .product-grid > div {
-    width: 100% !important;       /* penuh sesuai kolom */
-    height: 200px !important;      /* lebih kecil */
+    width: 100% !important;       
+    height: 200px !important;      
     padding: 4px !important;
   }
 
