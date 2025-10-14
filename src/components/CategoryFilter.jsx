@@ -67,60 +67,75 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
   ];
 
   return (
-  <>
-  <nav style={navbarStyle}>
-    <h3
-      style={{
-        fontWeight: "800",
-        letterSpacing: "1px",
-        fontSize: "1.1rem",
-        color: "red",
-        transition: "color 0.6s ease",
-      }}
-    >
-      YAMI STORE
-    </h3>
+    <>
+      <nav style={navbarStyle}>
+        <h3
+          style={{
+            fontWeight: "800",
+            letterSpacing: "1px",
+            fontSize: "1.1rem",
+            color: "red",
+            transition: "color 0.6s ease",
+          }}
+        >
+          YAMI STORE
+        </h3>
 
-    <ul style={categoryListStyle}>
-      {categories.map((c) => {
-        const isActive = selectCategory === c.value;
-        const activeColor = theme === "dark" ? "#b30000" : "#ff4d4d";
+        <ul style={categoryListStyle}>
+          {categories.map((c) => {
+            const isActive = selectCategory === c.value;
+            const activeColor = theme === "dark" ? "#b30000" : "#ff4d4d";
 
-        return (
-          <li
-            key={c.value}
-            onClick={() => onCategoryChange(c.value)}
-            style={{
-              cursor: "pointer",
-              borderBottom: `2px solid ${isActive ? activeColor : "transparent"}`,
-              color: isActive ? activeColor : theme === "dark" ? "#f5f5f5" : "#111111",
-              fontWeight: isActive ? "700" : "500",
-              paddingBottom: "2px",
-              fontSize: "1rem",
-              transition:
-                "color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease",
-            }}
-          >
-            {c.label}
-          </li>
-        );
-      })}
-    </ul>
+            return (
+              <li
+                key={c.value}
+                onClick={() => onCategoryChange(c.value)}
+                style={{
+                  cursor: "pointer",
+                  position: "relative",
+                  color: isActive
+                    ? activeColor
+                    : theme === "dark"
+                    ? "#f5f5f5"
+                    : "#111111",
+                  fontWeight: isActive ? "700" : "500",
+                  paddingBottom: "4px",
+                  fontSize: "1rem",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                {c.label}
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    height: "2px",
+                    width: isActive ? "100%" : "0%",
+                    backgroundColor: activeColor,
+                    borderRadius: "2px",
+                    transition: "width 0.3s ease",
+                  }}
+                ></span>
+              </li>
+            );
+          })}
+        </ul>
 
-    <button
-      style={buttonStyle}
-      onClick={() => {
-        setActiveOutline(true);
-        toggleTheme();
-        setTimeout(() => setActiveOutline(false), 400);
-      }}
-    >
-      {theme === "dark" ? "𖤓" : "☪"}
-      <span style={outlineStyle}></span>
-    </button>
-  </nav>
+        <button
+          style={buttonStyle}
+          onClick={() => {
+            setActiveOutline(true);
+            toggleTheme();
+            setTimeout(() => setActiveOutline(false), 400);
+          }}
+        >
+          {theme === "dark" ? "𖤓" : "☪"}
+          <span style={outlineStyle}></span>
+        </button>
+      </nav>
 
-  <style>{`
+      <style>{`
     @media (max-width: 480px) {
       nav {
         padding: 4px 6px !important;
@@ -144,8 +159,6 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
       }
     }
   `}</style>
-</>
-
-
+    </>
   );
 }

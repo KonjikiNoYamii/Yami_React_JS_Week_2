@@ -13,8 +13,8 @@ export default function ProductList() {
   const [search, setSearch] = useState("");
   const { theme } = useContext(ThemeContext);
 
-  const [mounted, setMounted] = useState(false);
-  const [fade, setFade] = useState(false);
+  const [displayProducts, setDisplayProducts] = useState([]);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,32 +23,37 @@ export default function ProductList() {
         if (!res.ok) throw new Error("Gagal mengambil data");
         const data = await res.json();
         setProduct(data);
+        setDisplayProducts(data); // tampilkan awal
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
-        setMounted(true);
       }
     };
     fetchData();
   }, []);
 
+  const filteredProducts = product.filter((item) => {
+    const matchCategory =
+      category === "all" ? true : item.category === category;
+    const matchSearch = item.title.toLowerCase().includes(search.toLowerCase());
+    return matchCategory && matchSearch;
+  });
+
+  // Saat category/search berubah → fade-out dulu
   useEffect(() => {
-    if (!mounted) return;
-    setFade(true);
-    const timer = setTimeout(() => setFade(false), 20);
+    if (loading) return;
+    setFadeOut(true);
+    const timer = setTimeout(() => {
+      setDisplayProducts(filteredProducts); // update produk setelah fade-out
+      setFadeOut(false); // fade-in otomatis
+    }, 200); // durasi fade
     return () => clearTimeout(timer);
-  }, [category, search, mounted]);
+  }, [category, search]);
 
   if (loading)
     return <p style={{ textAlign: "center" }}>⏳ Sedang memuat produk...</p>;
   if (error) return <p>{error}</p>;
-
-  const filterProduct = product.filter((item) => {
-    const matchCategory = category === "all" ? true : item.category === category;
-    const matchSearch = item.title.toLowerCase().includes(search.toLowerCase());
-    return matchCategory && matchSearch;
-  });
 
   const containerStyle = {
     backgroundColor: theme === "dark" ? "#0d0d0d" : "#ffffff",
@@ -59,110 +64,58 @@ export default function ProductList() {
 
   const gridStyle = {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)", // desktop default
+    gridTemplateColumns: "repeat(4, 1fr)",
     gap: "20px",
     justifyItems: "center",
     padding: "30px",
-    opacity: fade ? 0.5 : 1,
-    transform: fade ? "translateY(10px)" : "translateY(0)",
-    transition: "opacity 0.5s ease, transform 0.5s ease",
   };
 
   return (
     <div style={containerStyle}>
-      <CategoryFilter selectCategory={category} onCategoryChange={setCategory} />
+      <CategoryFilter
+        selectCategory={category}
+        onCategoryChange={setCategory}
+      />
       <SearchBar searchTerm={search} onSearchChange={setSearch} />
 
-      {filterProduct.length === 0 ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "300px",
-            textAlign: "center",
-            color: theme === "dark" ? "#f5f5f5" : "#111111",
-            transition: "color 0.5s ease",
-            gap: "15px",
-          }}
-        >
-          <img
-            src="/empty.gif"
-            alt="Tidak ditemukan"
-            style={{
-              width: "200px",
-              height: "250px",
-              objectFit: "contain",
-              opacity: 0.8,
-              transition: "opacity 0.5s ease, transform 0.5s ease",
-            }}
-          />
-          <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
-            Produk tidak ditemukan...
-          </p>
-        </div>
+      {displayProducts.length === 0 ? (
+        <p>Produk tidak ditemukan...</p>
       ) : (
         <div style={gridStyle} className="product-grid">
-          {filterProduct.map((product) => (
-            <ProductCard key={product.id} product={product} />
+          {displayProducts.map((product, idx) => (
+            <div
+              key={product.id}
+              style={{
+                opacity: fadeOut ? 0 : 1,
+                transform: fadeOut ? "translateY(20px)" : "translateY(0)",
+                transition: `opacity 0.4s ease ${
+                  idx * 50
+                }ms, transform 0.4s ease ${idx * 50}ms`,
+              }}
+            >
+              <ProductCard product={product} />
+            </div>
           ))}
         </div>
       )}
 
-      {/* Media Query untuk responsive & card lebih kecil di HP */}
+      {/* Media Query responsive */}
       <style>{`
         @media (max-width: 1024px) {
           .product-grid {
             grid-template-columns: repeat(3, 1fr) !important;
-            gap: 18px !important;
-            padding: 25px !important;
           }
         }
         @media (max-width: 768px) {
           .product-grid {
             grid-template-columns: repeat(2, 1fr) !important;
-            gap: 12px !important;
-            padding: 15px !important;
-          }
-          .product-grid > div {
-            width: 140px !important;
-            height: 200px !important;
           }
         }
-@media (max-width: 480px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 6px !important;
-    padding-left: 4px !important;   /* kurangi padding kiri */
-    padding-right: 4px !important;  /* kurangi padding kanan */
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-  }
-  .product-grid > div {
-    width: 120px !important;
-    height: 220px !important;
-    padding: 6px !important;
-  }
-  .product-grid > div img {
-    width: 70px !important;
-    height: 70px !important;
-  }
-  .product-grid > div h3 {
-    font-size: 11px !important;
-    height: 40px !important;
-  }
-  .product-grid > div p {
-    font-size: 11px !important;
-  }
-  .product-grid > div button {
-    padding: 4px 8px !important;
-    font-size: 11px !important;
-  }
-}
-
-
-
+        @media (max-width: 480px) {
+          .product-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
       `}</style>
     </div>
   );
