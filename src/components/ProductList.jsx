@@ -1,3 +1,4 @@
+// ProductList.js
 import { useEffect, useState, useContext } from "react";
 import CategoryFilter from "./CategoryFilter";
 import ProductCard from "./ProductCard";
@@ -44,8 +45,7 @@ export default function ProductList() {
   if (error) return <p>{error}</p>;
 
   const filterProduct = product.filter((item) => {
-    const matchCategory =
-      category === "all" ? true : item.category === category;
+    const matchCategory = category === "all" ? true : item.category === category;
     const matchSearch = item.title.toLowerCase().includes(search.toLowerCase());
     return matchCategory && matchSearch;
   });
@@ -59,7 +59,7 @@ export default function ProductList() {
 
   const gridStyle = {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
+    gridTemplateColumns: "repeat(4, 1fr)", // desktop default
     gap: "20px",
     justifyItems: "center",
     padding: "30px",
@@ -70,64 +70,90 @@ export default function ProductList() {
 
   return (
     <div style={containerStyle}>
-      <CategoryFilter
-        selectCategory={category}
-        onCategoryChange={setCategory}
-      />
+      <CategoryFilter selectCategory={category} onCategoryChange={setCategory} />
       <SearchBar searchTerm={search} onSearchChange={setSearch} />
 
-{filterProduct.length === 0 ? (
-  <div
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "300px",
-      textAlign: "center",
-      color: theme === "dark" ? "#f5f5f5" : "#111111",
-      transition: "color 0.5s ease",
-      gap: "15px",
-    }}
-  >
-    <img
-      src="/empty.gif"
-      alt="Tidak ditemukan"
-      style={{
-        width: "200px",
-        height: "250px",
-        objectFit: "contain",
-        opacity: 0.8,
-        transition: "opacity 0.5s ease, transform 0.5s ease",
-      }}
-    />
-    <p
-      style={{
-        fontSize: "1.2rem",
-        fontWeight: "600",
-      }}
-    >
-     Produk tidak ditemukan...
-    </p>
-  </div>
-) : (
-  <div style={gridStyle}>
-    {filterProduct.map((product) => (
-      <ProductCard key={product.id} product={product} />
-    ))}
-  </div>
-)}
+      {filterProduct.length === 0 ? (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "300px",
+            textAlign: "center",
+            color: theme === "dark" ? "#f5f5f5" : "#111111",
+            transition: "color 0.5s ease",
+            gap: "15px",
+          }}
+        >
+          <img
+            src="/empty.gif"
+            alt="Tidak ditemukan"
+            style={{
+              width: "200px",
+              height: "250px",
+              objectFit: "contain",
+              opacity: 0.8,
+              transition: "opacity 0.5s ease, transform 0.5s ease",
+            }}
+          />
+          <p style={{ fontSize: "1.2rem", fontWeight: "600" }}>
+            Produk tidak ditemukan...
+          </p>
+        </div>
+      ) : (
+        <div style={gridStyle} className="product-grid">
+          {filterProduct.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
 
-
+      {/* Media Query untuk responsive & card lebih kecil di HP */}
       <style>{`
         @media (max-width: 1024px) {
-          div[style*="grid"] {
-            grid-template-columns: repeat(2, 1fr) !important;
+          .product-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 18px !important;
+            padding: 25px !important;
           }
         }
-        @media (max-width: 600px) {
-          div[style*="grid"] {
-            grid-template-columns: repeat(1, 1fr) !important;
+        @media (max-width: 768px) {
+          .product-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 12px !important;
+            padding: 15px !important;
+          }
+          .product-grid > div {
+            width: 140px !important;
+            height: 200px !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .product-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 8px !important;
+            padding: 10px !important;
+          }
+          .product-grid > div {
+            width: 150px !important;
+            height: 260px !important;
+          }
+          .product-grid > div img {
+            width: 100px !important;
+            height: 100px !important;
+          }
+          .product-grid > div h3 {
+            font-size: 12px !important;
+            height: 45px !important;
+          }
+          .product-grid > div p {
+            font-size: 12px !important;
+          }
+          .product-grid > div button {
+            padding: 6px 10px !important;
+            font-size: 12px !important;
           }
         }
       `}</style>

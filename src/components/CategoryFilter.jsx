@@ -7,19 +7,22 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
 
   const navbarStyle = {
     display: "flex",
+    flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "15px 30px",
-    backgroundColor: theme === "dark" ? "#1a1a1a" : "#f5f5f5", // pakai putih tetap
-    borderBottom: "2px solid", 
+    padding: "15px 20px",
+    backgroundColor: theme === "dark" ? "#1a1a1a" : "#f5f5f5",
+    borderBottom: `2px solid ${theme === "dark" ? "#b30000" : "#ff4d4d"}`,
     color: theme === "dark" ? "#f5f5f5" : "#111111",
-    transition: "background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease",
+    transition: "all 0.5s ease",
     boxSizing: "border-box",
+    fontSize: "1rem",
   };
 
   const categoryListStyle = {
     display: "flex",
-    gap: "25px",
+    flexWrap: "wrap",
+    gap: "15px",
     listStyle: "none",
     margin: 0,
     padding: 0,
@@ -27,13 +30,12 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
 
   const buttonStyle = {
     position: "relative",
-    width: "50px",  // ukuran tetap
-    height: "50px", // ukuran tetap
-    backgroundColor: theme === "dark" ? "#1a1a1a" : "#f5f5f5", // warna light fix
+    width: "50px",
+    height: "50px",
+    backgroundColor: theme === "dark" ? "#1a1a1a" : "#f5f5f5",
     color: theme === "dark" ? "white" : "black",
     border: "none",
     borderRadius: "8px",
-    padding: "0", // padding dihapus karena width/height sudah fix
     cursor: "pointer",
     fontWeight: "700",
     fontSize: "25px",
@@ -41,19 +43,19 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
-    transition: "transform 0.3s ease, background-color 0.3s ease",
+    transition: "all 0.3s ease",
   };
 
   const outlineStyle = {
     position: "absolute",
-    bottom: "0px",
-    left: "0",
-    width: "100%", // lebar tetap
+    bottom: 0,
+    left: 0,
+    width: "100%",
     height: "3px",
     backgroundColor: "#fff",
     borderRadius: "2px",
     transition: "opacity 0.35s ease",
-    opacity: activeOutline ? 1 : 0, // pakai opacity untuk animasi
+    opacity: activeOutline ? 1 : 0,
   };
 
   const categories = [
@@ -65,65 +67,84 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
   ];
 
   return (
-    <nav style={navbarStyle}>
-      <h3
-        style={{
-          fontWeight: "800",
-          letterSpacing: "1.2px",
-          fontSize: "1.3rem",
-          color: "red",
-          transition: "color 0.6s ease",
-        }}
-      >
-        YAMI STORE
-      </h3>
+    <>
+      <nav style={navbarStyle}>
+        <h3
+          style={{
+            fontWeight: "800",
+            letterSpacing: "1.2px",
+            fontSize: "1.3rem",
+            color: "red",
+            transition: "color 0.6s ease",
+          }}
+        >
+          YAMI STORE
+        </h3>
 
-      <ul style={categoryListStyle}>
-        {categories.map((c) => {
-          const isActive = selectCategory === c.value;
-          const activeColor = theme === "dark" ? "#b30000" : "#ff4d4d";
+        <ul style={categoryListStyle}>
+          {categories.map((c) => {
+            const isActive = selectCategory === c.value;
+            const activeColor = theme === "dark" ? "#b30000" : "#ff4d4d";
 
-          return (
-            <li
-              key={c.value}
-              onClick={() => onCategoryChange(c.value)}
-              style={{
-                cursor: "pointer",
-                borderBottom: `3px solid ${isActive ? activeColor : "transparent"}`,
-                color: isActive ? activeColor : theme === "dark" ? "#f5f5f5" : "#111111",
-                fontWeight: isActive ? "700" : "600",
-                paddingBottom: "6px",
-                fontSize: "1.05rem",
-                transition: "color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.transform = "scale(1.08)";
-                if (!isActive) e.target.style.color = activeColor; 
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.transform = "scale(1)";
-                if (!isActive) e.target.style.color = theme === "dark" ? "#f5f5f5" : "#111111";
-              }}
-            >
-              {c.label}
-            </li>
-          );
-        })}
-      </ul>
+            return (
+              <li
+                key={c.value}
+                onClick={() => onCategoryChange(c.value)}
+                style={{
+                  cursor: "pointer",
+                  borderBottom: `3px solid ${isActive ? activeColor : "transparent"}`,
+                  color: isActive ? activeColor : theme === "dark" ? "#f5f5f5" : "#111111",
+                  fontWeight: isActive ? "700" : "600",
+                  paddingBottom: "4px",
+                  fontSize: "1rem",
+                  transition:
+                    "color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease",
+                }}
+              >
+                {c.label}
+              </li>
+            );
+          })}
+        </ul>
 
-      <button
-        style={buttonStyle}
-        onClick={() => {
-          setActiveOutline(true);
-          toggleTheme();
-          setTimeout(() => setActiveOutline(false), 400); 
-        }}
-        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-      >
-        {theme === "dark" ? "𖤓" : "☪"}
-        <span style={outlineStyle}></span>
-      </button>
-    </nav>
+        <button
+          style={buttonStyle}
+          onClick={() => {
+            setActiveOutline(true);
+            toggleTheme();
+            setTimeout(() => setActiveOutline(false), 400);
+          }}
+        >
+          {theme === "dark" ? "𖤓" : "☪"}
+          <span style={outlineStyle}></span>
+        </button>
+      </nav>
+
+      {/* Media Query untuk navbar responsive */}
+      <style>{`
+        @media (max-width: 600px) {
+          nav {
+            padding: 8px 12px !important;
+            font-size: 0.9rem !important;
+          }
+          nav h3 {
+            font-size: 1rem !important;
+          }
+          nav ul li {
+            font-size: 0.85rem !important;
+            padding-bottom: 3px !important;
+          }
+          nav button {
+            width: 40px !important;
+            height: 40px !important;
+            font-size: 20px !important;
+          }
+          nav ul {
+            gap: 8px !important;
+            justify-content: center;
+          }
+        }
+      `}</style>
+    </>
   );
 }
