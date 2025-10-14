@@ -91,7 +91,7 @@ export default function ProductList() {
     }}
   >
     <img
-      src="public/empty.gif"
+      src="/empty.gif"
       alt="Tidak ditemukan"
       style={{
         width: "200px",
