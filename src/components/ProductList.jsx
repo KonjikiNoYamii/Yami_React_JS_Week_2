@@ -152,7 +152,7 @@ export default function ProductList() {
             font-size: 12px !important;
           }
           .product-grid > div button {
-            padding: 6px 10px !important;
+            padding: 3px 6px !important;
             font-size: 12px !important;
           }
         }
