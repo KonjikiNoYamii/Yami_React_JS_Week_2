@@ -68,83 +68,83 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
 
   return (
     <>
-      <nav style={navbarStyle}>
-        <h3
-          style={{
-            fontWeight: "800",
-            letterSpacing: "1.2px",
-            fontSize: "1.3rem",
-            color: "red",
-            transition: "color 0.6s ease",
-          }}
-        >
-          YAMI STORE
-        </h3>
+  <nav style={navbarStyle}>
+    <h3
+      style={{
+        fontWeight: "800",
+        letterSpacing: "1.2px",
+        fontSize: "1.3rem",
+        color: "red",
+        transition: "color 0.6s ease",
+      }}
+    >
+      YAMI STORE
+    </h3>
 
-        <ul style={categoryListStyle}>
-          {categories.map((c) => {
-            const isActive = selectCategory === c.value;
-            const activeColor = theme === "dark" ? "#b30000" : "#ff4d4d";
+    <ul style={categoryListStyle}>
+      {categories.map((c) => {
+        const isActive = selectCategory === c.value;
+        const activeColor = theme === "dark" ? "#b30000" : "#ff4d4d";
 
-            return (
-              <li
-                key={c.value}
-                onClick={() => onCategoryChange(c.value)}
-                style={{
-                  cursor: "pointer",
-                  borderBottom: `3px solid ${isActive ? activeColor : "transparent"}`,
-                  color: isActive ? activeColor : theme === "dark" ? "#f5f5f5" : "#111111",
-                  fontWeight: isActive ? "700" : "600",
-                  paddingBottom: "4px",
-                  fontSize: "1rem",
-                  transition:
-                    "color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease",
-                }}
-              >
-                {c.label}
-              </li>
-            );
-          })}
-        </ul>
+        return (
+          <li
+            key={c.value}
+            onClick={() => onCategoryChange(c.value)}
+            style={{
+              cursor: "pointer",
+              borderBottom: `3px solid ${isActive ? activeColor : "transparent"}`,
+              color: isActive ? activeColor : theme === "dark" ? "#f5f5f5" : "#111111",
+              fontWeight: isActive ? "700" : "600",
+              paddingBottom: "4px",
+              fontSize: "1rem",
+              transition:
+                "color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease",
+            }}
+          >
+            {c.label}
+          </li>
+        );
+      })}
+    </ul>
 
-        <button
-          style={buttonStyle}
-          onClick={() => {
-            setActiveOutline(true);
-            toggleTheme();
-            setTimeout(() => setActiveOutline(false), 400);
-          }}
-        >
-          {theme === "dark" ? "𖤓" : "☪"}
-          <span style={outlineStyle}></span>
-        </button>
-      </nav>
+    <button
+      style={buttonStyle}
+      onClick={() => {
+        setActiveOutline(true);
+        toggleTheme();
+        setTimeout(() => setActiveOutline(false), 400);
+      }}
+    >
+      {theme === "dark" ? "𖤓" : "☪"}
+      <span style={outlineStyle}></span>
+    </button>
+  </nav>
 
-      {/* Media Query untuk navbar responsive */}
-      <style>{`
-        @media (max-width: 600px) {
-          nav {
-            padding: 8px 12px !important;
-            font-size: 0.9rem !important;
-          }
-          nav h3 {
-            font-size: 1rem !important;
-          }
-          nav ul li {
-            font-size: 0.85rem !important;
-            padding-bottom: 3px !important;
-          }
-          nav button {
-            width: 40px !important;
-            height: 40px !important;
-            font-size: 20px !important;
-          }
-          nav ul {
-            gap: 8px !important;
-            justify-content: center;
-          }
-        }
-      `}</style>
-    </>
+  <style>{`
+    @media (max-width: 480px) {
+      nav {
+        padding: 6px 8px !important;       /* lebih ramping */
+        font-size: 0.85rem !important;
+      }
+      nav h3 {
+        font-size: 0.9rem !important;
+      }
+      nav ul li {
+        font-size: 0.75rem !important;
+        padding-bottom: 2px !important;
+      }
+      nav button {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 18px !important;
+      }
+      nav ul {
+        gap: 6px !important;
+        justify-content: center;
+      }
+    }
+  `}</style>
+</>
+
   );
 }
