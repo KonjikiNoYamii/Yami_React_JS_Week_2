@@ -137,8 +137,8 @@ export default function ProductList() {
             padding: 10px !important;
           }
           .product-grid > div {
-            width: 150px !important;
-            height: 260px !important;
+            width: 100px !important;
+            height: 200px !important;
           }
           .product-grid > div img {
             width: 100px !important;
