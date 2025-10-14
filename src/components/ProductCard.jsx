@@ -7,30 +7,29 @@ export default function ProductCard({ product }) {
   const { addCart } = useContext(CartContext);
   const { theme } = useContext(ThemeContext);
 
-const cardStyle = {
-  backgroundColor: theme === "dark" ? "#1a1a1a" : "#fff",
-  color: theme === "dark" ? "#f5f5f5" : "#111",
-  border: `1px solid ${theme === "dark" ? "#b30000" : "#ff4d4d"}`,
-  borderRadius: "12px",
-  padding: "10px",          // lebih kecil untuk responsive
-  margin: "5px",
-  width: "100%",             // fleksibel, ikut grid
-  maxWidth: "250px",         // desktop max
-  height: "auto",            // fleksibel
-  textAlign: "center",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "space-between",
-  alignItems: "center",
-  transition: "transform 0.2s, background-color 0.3s",
-};
+  const cardStyle = {
+    backgroundColor: theme === "dark" ? "#1a1a1a" : "#fff",
+    color: theme === "dark" ? "#f5f5f5" : "#111",
+    border: `1px solid ${theme === "dark" ? "#b30000" : "#ff4d4d"}`,
+    borderRadius: "12px",
+    padding: "20px",
+    margin: "10px",
+    width: "250px",
+    height: "400px",
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    alignItems: "center",
+    transition: "transform 0.2s, background-color 0.3s",
+  };
 
-const imgStyle = {
-  width: "100px",
-  height: "100px",
-  objectFit: "contain",
-  marginBottom: "8px",
-};
+  const imgStyle = {
+    width: "140px",
+    height: "140px",
+    objectFit: "contain",
+    marginBottom: "8px",
+  };
 
   const buttonStyle = {
     backgroundColor: theme === "dark" ? "#b30000" : "#ff4d4d",
