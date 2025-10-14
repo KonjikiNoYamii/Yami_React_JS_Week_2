@@ -14,6 +14,7 @@ export default function SearchBar({ searchTerm, onSearchChange }) {
 
   const inputStyle = {
     width: "60%",
+    maxWidth: "500px",
     padding: "10px 15px",
     borderRadius: "10px",
     border: `1px solid ${theme === "dark" ? "#b30000" : "#ff4d4d"}`,
@@ -25,14 +26,30 @@ export default function SearchBar({ searchTerm, onSearchChange }) {
   };
 
   return (
-    <div style={style}>
-      <input
-        type="text"
-        style={inputStyle}
-        placeholder="Cari produk..."
-        onChange={(e) => onSearchChange(e.target.value)}
-        value={searchTerm}
-      />
-    </div>
+    <>
+      <div style={style}>
+        <input
+          type="text"
+          style={inputStyle}
+          placeholder="Cari produk..."
+          onChange={(e) => onSearchChange(e.target.value)}
+          value={searchTerm}
+        />
+      </div>
+
+      {/* Media Query untuk HP */}
+      <style>{`
+        @media (max-width: 480px) {
+          div {
+            padding: 8px 4px !important;
+          }
+          input {
+            width: 90% !important;
+            padding: 6px 10px !important;
+            font-size: 12px !important;
+          }
+        }
+      `}</style>
+    </>
   );
 }
