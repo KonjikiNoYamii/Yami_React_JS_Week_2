@@ -96,7 +96,7 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
               color: isActive ? activeColor : theme === "dark" ? "#f5f5f5" : "#111111",
               fontWeight: isActive ? "700" : "500",
               paddingBottom: "2px",
-              fontSize: "0.7rem",
+              fontSize: "1rem",
               transition:
                 "color 0.3s ease, border-bottom-color 0.3s ease, transform 0.3s ease",
             }}
