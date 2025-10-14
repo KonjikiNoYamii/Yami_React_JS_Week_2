@@ -26,14 +26,14 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
 
   const buttonStyle = {
     position: "relative",
-    backgroundColor: theme === "dark" ? "#b30000" : "#ff4d4d",
-    color: "#fff",
+    backgroundColor: theme === "dark" ? "#1a1a1a" : "",
+    color: theme ===  "dark" ? "white": "black",
     border: "none",
     borderRadius: "8px",
     padding: "10px 16px",
     cursor: "pointer",
     fontWeight: "700",
-    fontSize: "1rem",
+    fontSize: "25px",
     transition: "transform 0.3s ease, background-color 0.3s ease",
     overflow: "hidden",
   };
@@ -68,7 +68,7 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
           transition: "color 0.6s ease",
         }}
       >
-        Yami Store
+        YAMI STORE
       </h3>
 
       <ul style={categoryListStyle}>
@@ -115,7 +115,7 @@ export default function CategoryFilter({ selectCategory, onCategoryChange }) {
         onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.08)")}
         onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
       >
-        {theme === "dark" ? "🌞" : "🌙"}
+        {theme === "dark" ? "𖤓" : "☪"}
         <span style={outlineStyle}></span>
       </button>
     </nav>
