@@ -111,11 +111,34 @@ export default function ProductList() {
             grid-template-columns: repeat(2, 1fr) !important;
           }
         }
-        @media (max-width: 480px) {
-          .product-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-        }
+@media (max-width: 480px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 6px !important;           
+    padding: 6px !important;      
+  }
+  .product-grid > div {
+    width: 120px !important;
+    height: 220px !important;
+    padding: 4px !important;       
+  }
+  .product-grid > div img {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  .product-grid > div h3 {
+    font-size: 11px !important;
+    height: 40px !important;
+  }
+  .product-grid > div p {
+    font-size: 11px !important;
+  }
+  .product-grid > div button {
+    padding: 4px 8px !important;
+    font-size: 11px !important;
+  }
+}
+
       `}</style>
     </div>
   );
